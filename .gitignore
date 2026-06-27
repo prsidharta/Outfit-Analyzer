@@ -2,3 +2,8 @@
 *.o
 *.exe
 .env
+vcpkg/
+build/
+out/
+__pycache__/
+*.pyc

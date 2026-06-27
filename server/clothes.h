@@ -1,7 +1,6 @@
 
 #pragma once
 
-#include <string>
 #include <vector>
 
 struct Clothes {
@@ -15,11 +14,12 @@ struct Clothes {
 
 };
 
+//Size 368 bytes for this struct
 struct RetailInfo{
 
-    std::string r_clothesName;
-    std::string r_brandName;
-    std::string r_purchaseLink;
+    char r_clothesName[50];
+    char r_brandName[50];
+    char r_purchaseLink[256];
     double r_price;
 
 };
