@@ -3,16 +3,14 @@ import outfit_pb2
 import outfit_pb2_grpc
 
 channel = grpc.insecure_channel('localhost:50051')
+client = outfit_pb2_grpc.FitAnalyzerStub(channel)
 
-client = outfit_pb2_grpc.OutfitAnalyzerStub(channel)
-
-test_id = 42
+test_id = 0
 print(f"Sending Item ID {test_id} over the network...")
-
 request = outfit_pb2.ItemRequest(item_id=test_id)
 
 try:
-    response = client.GetRetailInfo(request)
+    response = client.GetFitInfo(request)
     
     print("\n C++ Data")
     print(f"Item:  {response.clothes_name}")

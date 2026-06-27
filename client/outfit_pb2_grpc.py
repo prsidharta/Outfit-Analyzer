@@ -25,7 +25,7 @@ if _version_not_supported:
     )
 
 
-class OutfitAnalyzerStub:
+class FitAnalyzerStub:
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -34,43 +34,43 @@ class OutfitAnalyzerStub:
         Args:
             channel: A grpc.Channel.
         """
-        self.GetRetailInfo = channel.unary_unary(
-                '/outfit.OutfitAnalyzer/GetRetailInfo',
+        self.GetFitInfo = channel.unary_unary(
+                '/outfit.FitAnalyzer/GetFitInfo',
                 request_serializer=outfit__pb2.ItemRequest.SerializeToString,
                 response_deserializer=outfit__pb2.RetailResponse.FromString,
                 _registered_method=True)
 
 
-class OutfitAnalyzerServicer:
+class FitAnalyzerServicer:
     """Missing associated documentation comment in .proto file."""
 
-    def GetRetailInfo(self, request, context):
+    def GetFitInfo(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
 
-def add_OutfitAnalyzerServicer_to_server(servicer, server):
+def add_FitAnalyzerServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'GetRetailInfo': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetRetailInfo,
+            'GetFitInfo': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetFitInfo,
                     request_deserializer=outfit__pb2.ItemRequest.FromString,
                     response_serializer=outfit__pb2.RetailResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'outfit.OutfitAnalyzer', rpc_method_handlers)
+            'outfit.FitAnalyzer', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('outfit.OutfitAnalyzer', rpc_method_handlers)
+    server.add_registered_method_handlers('outfit.FitAnalyzer', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
-class OutfitAnalyzer:
+class FitAnalyzer:
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def GetRetailInfo(request,
+    def GetFitInfo(request,
             target,
             options=(),
             channel_credentials=None,
@@ -83,7 +83,7 @@ class OutfitAnalyzer:
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/outfit.OutfitAnalyzer/GetRetailInfo',
+            '/outfit.FitAnalyzer/GetFitInfo',
             outfit__pb2.ItemRequest.SerializeToString,
             outfit__pb2.RetailResponse.FromString,
             options,

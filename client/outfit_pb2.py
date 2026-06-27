@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0coutfit.proto\x12\x06outfit\"\x1e\n\x0bItemRequest\x12\x0f\n\x07item_id\x18\x01 \x01(\x05\"`\n\x0eRetailResponse\x12\x14\n\x0c\x63lothes_name\x18\x01 \x01(\t\x12\x12\n\nbrand_name\x18\x02 \x01(\t\x12\x15\n\rpurchase_link\x18\x03 \x01(\t\x12\r\n\x05price\x18\x04 \x01(\x01\x32N\n\x0eOutfitAnalyzer\x12<\n\rGetRetailInfo\x12\x13.outfit.ItemRequest\x1a\x16.outfit.RetailResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0coutfit.proto\x12\x06outfit\"\x1e\n\x0bItemRequest\x12\x0f\n\x07item_id\x18\x01 \x01(\x05\"`\n\x0eRetailResponse\x12\x14\n\x0c\x63lothes_name\x18\x01 \x01(\t\x12\x12\n\nbrand_name\x18\x02 \x01(\t\x12\x15\n\rpurchase_link\x18\x03 \x01(\t\x12\r\n\x05price\x18\x04 \x01(\x01\x32H\n\x0b\x46itAnalyzer\x12\x39\n\nGetFitInfo\x12\x13.outfit.ItemRequest\x1a\x16.outfit.RetailResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -35,6 +35,6 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_ITEMREQUEST']._serialized_end=54
   _globals['_RETAILRESPONSE']._serialized_start=56
   _globals['_RETAILRESPONSE']._serialized_end=152
-  _globals['_OUTFITANALYZER']._serialized_start=154
-  _globals['_OUTFITANALYZER']._serialized_end=232
+  _globals['_FITANALYZER']._serialized_start=154
+  _globals['_FITANALYZER']._serialized_end=226
 # @@protoc_insertion_point(module_scope)

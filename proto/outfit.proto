@@ -14,6 +14,6 @@ message RetailResponse {
   double price = 4;
 }
 
-service OutfitAnalyzer {
-  rpc GetRetailInfo (ItemRequest) returns (RetailResponse);
+service FitAnalyzer {
+  rpc GetFitInfo (ItemRequest) returns (RetailResponse);
 }

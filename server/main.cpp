@@ -1,31 +1,26 @@
 
-#include <unordered_map>
-#include <string>
+#include "FitServ.h"
+#include <grpcpp/grpcpp.h>
 #include <iostream>
-#include "clothes.h"
+#include <memory>
+#include <string>
 
-int main(){
+void RunServ() {
 
-    std::unordered_map<int, RetailInfo> clothesDatabase;
-    std::vector<Clothes> seenClothes;
+    std::string servAddress("0.0.0.0:50051");
+    FitServ service;
+    grpc::ServerBuilder builder;
 
-    clothesDatabase[0] = {"Red Shirt", "Nike", "nike.com/redshirt", 25.99};
-    clothesDatabase[1] = {"Blue Jeans", "Levi's", "levi.com/bluejeans", 45.00};
+    builder.AddListeningPort(servAddress, grpc::InsecureServerCredentials());
+    builder.RegisterService(&service);
 
-    seenClothes.push_back({150, 200, 50, 100, 0, 0.95});
-    seenClothes.push_back({300, 400, 60, 120, 99, 0.45});
+    std::unique_ptr<grpc::Server> server(builder.BuildAndStart());
+    std::cout << "[SERVER] Program listening on " << servAddress << std::endl;
 
-    for (const auto &item : seenClothes){
-        auto it = clothesDatabase.find(item.c_type);
-        if (it == clothesDatabase.end()){
-            std::cout << "Item Unavailable" << "\n";
-            continue;
-        }
+    server->Wait();
+}
 
-        std::cout << "Found " << it->second.r_clothesName << 
-        ". It costs $" << it->second.r_price << 
-        " and can be found at " << it->second.r_purchaseLink << "\n";
-    }
-
+int main(int argc, char **argv) {
+    RunServ();
     return 0;
 }
