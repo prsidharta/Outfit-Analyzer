@@ -18,7 +18,8 @@ if not vid.isOpened():
     sys.exit()
 print("Camera on. Press 'q' to quit.")
 
-last_call = 0
+prev_time = 0
+last_call = {"person": 0, "cell phone": 0}
 cd_sec = 3.0
 cache_data = None
 model = YOLO("yolov8n.pt")
@@ -34,16 +35,16 @@ while True:
         cls_id = int(box.cls[0])
         obj_name = model.names[cls_id]
 
-        if obj_name == "person":
+        if obj_name in ["person", "cell phone"]:
             x1, y1, x2, y2 = box.xyxy[0]
             x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
 
             cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 3)
 
             cur_time = time.time()
-            if (cur_time - last_call) > cd_sec:
+            if (cur_time - last_call[obj_name]) > cd_sec:
                 try:
-                    request = outfit_pb2.ItemRequest(item_id=0)
+                    request = outfit_pb2.ItemRequest(det_obj=obj_name)
                     response = client.GetFitInfo(request)
 
                     cache_data = {
@@ -51,10 +52,11 @@ while True:
                         "brand": response.brand_name,
                         "price": f"${response.price:.2f}",
                     }
-                    last_call = cur_time
+                    last_call[obj_name] = cur_time
                 except grpc.RpcError:
                     print("C++ Server Offline.")
                     cache_data = None
+            
             if cache_data:
                 display_text = f"{cache_data['brand']} {cache_data['name']} - {cache_data['price']}"
                 cv2.putText(
@@ -66,7 +68,11 @@ while True:
                     (0, 255, 0),
                     2,
                 )
-            break
+
+    new_time = time.time()
+    fps = 1 / (new_time - prev_time)
+    prev_time = new_time
+    cv2.putText(frame, f"FPS: {int(fps)}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
 
     cv2.imshow("Outfit Analyzer", frame)
 
@@ -75,21 +81,6 @@ while True:
     if key == ord("q"):
         print("Exiting.")
         break
-
-    elif key == ord("s"):
-        test_id = 0
-        print(f"Sending Item ID {test_id} over the network...")
-        request = outfit_pb2.ItemRequest(item_id=test_id)
-        try:
-            response = client.GetFitInfo(request)
-            print("\n C++ Data")
-            print(f"Item:  {response.clothes_name}")
-            print(f"Brand: {response.brand_name}")
-            print(f"Price: ${response.price}")
-            print(f"Link:  {response.purchase_link}")
-        except grpc.RpcError as e:
-            print("\n[NETWORK ERROR]: C++ off. Python is working.")
-
 
 vid.release()
 cv2.destroyAllWindows()

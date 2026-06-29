@@ -457,16 +457,21 @@ class ItemRequest final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kItemIdFieldNumber = 1,
+    kDetObjFieldNumber = 1,
   };
-  // int32 item_id = 1;
-  void clear_item_id() ;
-  ::int32_t item_id() const;
-  void set_item_id(::int32_t value);
+  // string det_obj = 1;
+  void clear_det_obj() ;
+  const ::std::string& det_obj() const;
+  template <typename Arg_ = const ::std::string&, typename... Args_>
+  void set_det_obj(Arg_&& arg, Args_... args);
+  ::std::string* PROTOBUF_NONNULL mutable_det_obj();
+  [[nodiscard]] ::std::string* PROTOBUF_NULLABLE release_det_obj();
+  void set_allocated_det_obj(::std::string* PROTOBUF_NULLABLE value);
 
   private:
-  ::int32_t _internal_item_id() const;
-  void _internal_set_item_id(::int32_t value);
+  const ::std::string& _internal_det_obj() const;
+  PROTOBUF_ALWAYS_INLINE void _internal_set_det_obj(const ::std::string& value);
+  ::std::string* PROTOBUF_NONNULL _internal_mutable_det_obj();
 
   public:
   // @@protoc_insertion_point(class_scope:outfit.ItemRequest)
@@ -474,7 +479,7 @@ class ItemRequest final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<0, 1,
-                                   0, 0,
+                                   0, 34,
                                    2>
       _table_;
 
@@ -495,7 +500,7 @@ class ItemRequest final : public ::google::protobuf::Message
         const ItemRequest& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::int32_t item_id_;
+    ::google::protobuf::internal::ArenaStringPtr det_obj_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -520,29 +525,69 @@ extern const ::google::protobuf::internal::ClassDataFull ItemRequest_class_data_
 
 // ItemRequest
 
-// int32 item_id = 1;
-inline void ItemRequest::clear_item_id() {
+// string det_obj = 1;
+inline void ItemRequest::clear_det_obj() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.item_id_ = 0;
+  _impl_.det_obj_.ClearToEmpty();
   ClearHasBit(_impl_._has_bits_[0],
                   0x00000001U);
 }
-inline ::int32_t ItemRequest::item_id() const {
-  // @@protoc_insertion_point(field_get:outfit.ItemRequest.item_id)
-  return _internal_item_id();
+inline const ::std::string& ItemRequest::det_obj() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:outfit.ItemRequest.det_obj)
+  return _internal_det_obj();
 }
-inline void ItemRequest::set_item_id(::int32_t value) {
-  _internal_set_item_id(value);
-  SetHasBit(_impl_._has_bits_[0], 0x00000001U);
-  // @@protoc_insertion_point(field_set:outfit.ItemRequest.item_id)
-}
-inline ::int32_t ItemRequest::_internal_item_id() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.item_id_;
-}
-inline void ItemRequest::_internal_set_item_id(::int32_t value) {
+template <typename Arg_, typename... Args_>
+PROTOBUF_ALWAYS_INLINE void ItemRequest::set_det_obj(Arg_&& arg, Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.item_id_ = value;
+  SetHasBit(_impl_._has_bits_[0], 0x00000001U);
+  _impl_.det_obj_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:outfit.ItemRequest.det_obj)
+}
+inline ::std::string* PROTOBUF_NONNULL ItemRequest::mutable_det_obj()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  SetHasBit(_impl_._has_bits_[0], 0x00000001U);
+  ::std::string* _s = _internal_mutable_det_obj();
+  // @@protoc_insertion_point(field_mutable:outfit.ItemRequest.det_obj)
+  return _s;
+}
+inline const ::std::string& ItemRequest::_internal_det_obj() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.det_obj_.Get();
+}
+inline void ItemRequest::_internal_set_det_obj(const ::std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.det_obj_.Set(value, GetArena());
+}
+inline ::std::string* PROTOBUF_NONNULL ItemRequest::_internal_mutable_det_obj() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.det_obj_.Mutable( GetArena());
+}
+inline ::std::string* PROTOBUF_NULLABLE ItemRequest::release_det_obj() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:outfit.ItemRequest.det_obj)
+  if (!CheckHasBit(_impl_._has_bits_[0], 0x00000001U)) {
+    return nullptr;
+  }
+  ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
+  auto* released = _impl_.det_obj_.Release();
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString()) {
+    _impl_.det_obj_.Set("", GetArena());
+  }
+  return released;
+}
+inline void ItemRequest::set_allocated_det_obj(::std::string* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (value != nullptr) {
+    SetHasBit(_impl_._has_bits_[0], 0x00000001U);
+  } else {
+    ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
+  }
+  _impl_.det_obj_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.det_obj_.IsDefault()) {
+    _impl_.det_obj_.Set("", GetArena());
+  }
+  // @@protoc_insertion_point(field_set_allocated:outfit.ItemRequest.det_obj)
 }
 
 // -------------------------------------------------------------------

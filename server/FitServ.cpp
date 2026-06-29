@@ -2,15 +2,17 @@
 #include <iostream>
 
 FitServ::FitServ() {
-    clothesData[0] = {"Red Shirt", "Nike", "nike.com/redshirt", 25.99};
+    clothesData["person"] = {"Red Shirt", "Nike", "nike.com/redshirt", 25.99};
+    clothesData["cell phone"] = {"Black Beanie", "Carhartt", "carhartt.com/beanie", 19.99};
 }
 
 grpc::Status FitServ::GetFitInfo(grpc::ServerContext *context, const outfit::ItemRequest *request,
                                  outfit::RetailResponse *response) {
 
-    int itemId = request->item_id();
+    std::string detObj = request->det_obj();
+    std::cout << "Detected: " << detObj << std::endl;
 
-    if (auto it = clothesData.find(itemId); it != clothesData.end()) {
+    if (auto it = clothesData.find(detObj); it != clothesData.end()) {
 
         auto item = it->second;
         response->set_clothes_name(item.r_clothesName);

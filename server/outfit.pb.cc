@@ -63,7 +63,9 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 inline constexpr ItemRequest::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
-        item_id_{0} {}
+        det_obj_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()) {}
 
 template <typename>
 PROTOBUF_CONSTEXPR ItemRequest::ItemRequest(::_pbi::ConstantInitialized)
@@ -95,7 +97,7 @@ const ::uint32_t
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::outfit::ItemRequest, _impl_._has_bits_),
         4, // hasbit index offset
-        PROTOBUF_FIELD_OFFSET(::outfit::ItemRequest, _impl_.item_id_),
+        PROTOBUF_FIELD_OFFSET(::outfit::ItemRequest, _impl_.det_obj_),
         0,
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::outfit::RetailResponse, _impl_._has_bits_),
@@ -122,7 +124,7 @@ static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
 const char descriptor_table_protodef_outfit_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\014outfit.proto\022\006outfit\"\036\n\013ItemRequest\022\017\n"
-    "\007item_id\030\001 \001(\005\"`\n\016RetailResponse\022\024\n\014clot"
+    "\007det_obj\030\001 \001(\t\"`\n\016RetailResponse\022\024\n\014clot"
     "hes_name\030\001 \001(\t\022\022\n\nbrand_name\030\002 \001(\t\022\025\n\rpu"
     "rchase_link\030\003 \001(\t\022\r\n\005price\030\004 \001(\0012H\n\013FitA"
     "nalyzer\0229\n\nGetFitInfo\022\023.outfit.ItemReque"
@@ -165,25 +167,38 @@ ItemRequest::ItemRequest(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
   SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:outfit.ItemRequest)
 }
+PROTOBUF_NDEBUG_INLINE ItemRequest::Impl_::Impl_(
+    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
+    [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
+    [[maybe_unused]] const ::outfit::ItemRequest& from_msg)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0},
+        det_obj_(arena, from.det_obj_) {}
+
 ItemRequest::ItemRequest(
-    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const ItemRequest& from)
+    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena,
+    const ItemRequest& from)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, ItemRequest_class_data_.base()),
+    : ::google::protobuf::Message(arena, ItemRequest_class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena),
+    : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(from._impl_) {
+  ItemRequest* const _this = this;
+  (void)_this;
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+
+  // @@protoc_insertion_point(copy_constructor:outfit.ItemRequest)
 }
 PROTOBUF_NDEBUG_INLINE ItemRequest::Impl_::Impl_(
     [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
     [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
-      : _cached_size_{0} {}
+      : _cached_size_{0},
+        det_obj_(arena) {}
 
 inline void ItemRequest::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.item_id_ = {};
 }
 ItemRequest::~ItemRequest() {
   // @@protoc_insertion_point(destructor:outfit.ItemRequest)
@@ -196,6 +211,7 @@ inline void ItemRequest::SharedDtor(MessageLite& self) {
   }
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.det_obj_.Destroy();
   this_._impl_.~Impl_();
 }
 
@@ -205,7 +221,7 @@ inline void* PROTOBUF_NONNULL ItemRequest::PlacementNew_(
   return ::new (mem) ItemRequest(arena);
 }
 constexpr auto ItemRequest::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(ItemRequest),
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(ItemRequest),
                                             alignof(ItemRequest));
 }
 constexpr auto ItemRequest::InternalGenerateClassData_() {
@@ -242,7 +258,7 @@ ItemRequest::GetClassData() const {
   return ItemRequest_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 0, 0, 2>
+const ::_pbi::TcParseTable<0, 1, 0, 34, 2>
 ItemRequest::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(ItemRequest, _impl_._has_bits_),
@@ -261,18 +277,21 @@ ItemRequest::_table_ = {
     ::_pbi::TcParser::GetTable<::outfit::ItemRequest>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // int32 item_id = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(ItemRequest, _impl_.item_id_), 0>(),
-     {8, 0, 0,
-      PROTOBUF_FIELD_OFFSET(ItemRequest, _impl_.item_id_)}},
+    // string det_obj = 1;
+    {::_pbi::TcParser::FastUS1,
+     {10, 0, 0,
+      PROTOBUF_FIELD_OFFSET(ItemRequest, _impl_.det_obj_)}},
   }}, {{
     65535, 65535
   }}, {{
-    // int32 item_id = 1;
-    {PROTOBUF_FIELD_OFFSET(ItemRequest, _impl_.item_id_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+    // string det_obj = 1;
+    {PROTOBUF_FIELD_OFFSET(ItemRequest, _impl_.det_obj_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kUtf8String | ::_fl::kRepAString)},
   }},
   // no aux_entries
   {{
+    "\22\7\0\0\0\0\0\0"
+    "outfit.ItemRequest"
+    "det_obj"
   }},
 };
 PROTOBUF_NOINLINE void ItemRequest::Clear() {
@@ -282,7 +301,10 @@ PROTOBUF_NOINLINE void ItemRequest::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.item_id_ = 0;
+  cached_has_bits = _impl_._has_bits_[0];
+  if (CheckHasBit(cached_has_bits, 0x00000001U)) {
+    _impl_.det_obj_.ClearNonDefaultToEmpty();
+  }
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
@@ -306,12 +328,13 @@ PROTOBUF_NOINLINE void ItemRequest::Clear() {
   (void)cached_has_bits;
 
   cached_has_bits = this_._impl_._has_bits_[0];
-  // int32 item_id = 1;
+  // string det_obj = 1;
   if (CheckHasBit(cached_has_bits, 0x00000001U)) {
-    if (this_._internal_item_id() != 0) {
-      target =
-          ::google::protobuf::internal::WireFormatLite::WriteInt32ToArrayWithField<1>(
-              stream, this_._internal_item_id(), target);
+    if (!this_._internal_det_obj().empty()) {
+      const ::std::string& _s = this_._internal_det_obj();
+      ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+          _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "outfit.ItemRequest.det_obj");
+      target = stream->WriteStringMaybeAliased(1, _s, target);
     }
   }
 
@@ -339,12 +362,12 @@ PROTOBUF_NOINLINE void ItemRequest::Clear() {
   (void)cached_has_bits;
 
    {
-    // int32 item_id = 1;
+    // string det_obj = 1;
     cached_has_bits = this_._impl_._has_bits_[0];
     if (CheckHasBit(cached_has_bits, 0x00000001U)) {
-      if (this_._internal_item_id() != 0) {
-        total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-            this_._internal_item_id());
+      if (!this_._internal_det_obj().empty()) {
+        total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                        this_._internal_det_obj());
       }
     }
   }
@@ -367,8 +390,12 @@ void ItemRequest::MergeImpl(::google::protobuf::MessageLite& to_msg,
 
   cached_has_bits = from._impl_._has_bits_[0];
   if (CheckHasBit(cached_has_bits, 0x00000001U)) {
-    if (from._internal_item_id() != 0) {
-      _this->_impl_.item_id_ = from._impl_.item_id_;
+    if (!from._internal_det_obj().empty()) {
+      _this->_internal_set_det_obj(from._internal_det_obj());
+    } else {
+      if (_this->_impl_.det_obj_.IsDefault()) {
+        _this->_internal_set_det_obj("");
+      }
     }
   }
   _this->_impl_._has_bits_[0] |= cached_has_bits;
@@ -386,9 +413,11 @@ void ItemRequest::CopyFrom(const ItemRequest& from) {
 
 void ItemRequest::InternalSwap(ItemRequest* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
   using ::std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-  swap(_impl_.item_id_, other->_impl_.item_id_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.det_obj_, &other->_impl_.det_obj_, arena);
 }
 
 ::google::protobuf::Metadata ItemRequest::GetMetadata() const {

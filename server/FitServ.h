@@ -8,7 +8,7 @@
 
 class FitServ final : public outfit::FitAnalyzer::Service {
   private:
-    std::unordered_map<int, RetailInfo> clothesData;
+    std::unordered_map<std::string, RetailInfo> clothesData;
 
   public:
     FitServ();

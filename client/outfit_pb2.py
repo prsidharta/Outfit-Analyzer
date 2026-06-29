@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0coutfit.proto\x12\x06outfit\"\x1e\n\x0bItemRequest\x12\x0f\n\x07item_id\x18\x01 \x01(\x05\"`\n\x0eRetailResponse\x12\x14\n\x0c\x63lothes_name\x18\x01 \x01(\t\x12\x12\n\nbrand_name\x18\x02 \x01(\t\x12\x15\n\rpurchase_link\x18\x03 \x01(\t\x12\r\n\x05price\x18\x04 \x01(\x01\x32H\n\x0b\x46itAnalyzer\x12\x39\n\nGetFitInfo\x12\x13.outfit.ItemRequest\x1a\x16.outfit.RetailResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0coutfit.proto\x12\x06outfit\"\x1e\n\x0bItemRequest\x12\x0f\n\x07\x64\x65t_obj\x18\x01 \x01(\t\"`\n\x0eRetailResponse\x12\x14\n\x0c\x63lothes_name\x18\x01 \x01(\t\x12\x12\n\nbrand_name\x18\x02 \x01(\t\x12\x15\n\rpurchase_link\x18\x03 \x01(\t\x12\r\n\x05price\x18\x04 \x01(\x01\x32H\n\x0b\x46itAnalyzer\x12\x39\n\nGetFitInfo\x12\x13.outfit.ItemRequest\x1a\x16.outfit.RetailResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)

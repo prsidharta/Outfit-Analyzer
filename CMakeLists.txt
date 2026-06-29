@@ -9,6 +9,21 @@ find_package(gRPC CONFIG REQUIRED)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/server)
 
+add_custom_command(
+    OUTPUT
+        ${CMAKE_CURRENT_SOURCE_DIR}/server/outfit.pb.cc
+        ${CMAKE_CURRENT_SOURCE_DIR}/server/outfit.pb.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/server/outfit.grpc.pb.cc
+        ${CMAKE_CURRENT_SOURCE_DIR}/server/outfit.grpc.pb.h
+    COMMAND protobuf::protoc
+    ARGS --proto_path=${CMAKE_CURRENT_SOURCE_DIR}/proto
+         --cpp_out=${CMAKE_CURRENT_SOURCE_DIR}/server
+         --grpc_out=${CMAKE_CURRENT_SOURCE_DIR}/server
+         --plugin=protoc-gen-grpc=$<TARGET_FILE:gRPC::grpc_cpp_plugin>
+         ${CMAKE_CURRENT_SOURCE_DIR}/proto/outfit.proto
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/proto/outfit.proto
+)
+
 add_executable(server
     server/main.cpp
     server/FitServ.cpp
